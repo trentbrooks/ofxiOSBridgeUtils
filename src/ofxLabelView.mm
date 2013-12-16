@@ -11,6 +11,7 @@ ofxLabelView::ofxLabelView(){
     fontName = "Helvetica";
     fontSize = 18;
     textAlign = LEFT;
+    textClr = ofColor(0);
 }
 
 ofxLabelView::~ofxLabelView(){
@@ -40,8 +41,9 @@ void ofxLabelView::add(string text, int posX, int posY, int width, int height) {
     //label.opaque = NO;
     //label.alpha = 0.5;
     label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor colorWithRed:textClr.r/255.0 green:textClr.g/255.0 blue:textClr.b/255.0 alpha:textClr.a/255.0];
     label.font = [UIFont fontWithName:[NSString stringWithUTF8String:fontName.c_str()] size:fontSize];
-    if(height == -1) [label sizeToFit];       
+    if(height == -1) [label sizeToFit];
     
     if(!isLabelAdded) [ofxiPhoneGetGLParentView() addSubview:label];
     isLabelAdded = true;
@@ -74,6 +76,14 @@ void ofxLabelView::setFont(string name, int size) {
         ofLogError() << name << " font does not exist in system fonts.";
     }
     
+}
+
+void ofxLabelView::setColor(ofColor clr) {
+    
+    textClr = clr;
+    if(isLabelAdded) {
+        label.textColor = [UIColor colorWithRed:textClr.r/255.0 green:textClr.g/255.0 blue:textClr.b/255.0 alpha:textClr.a/255.0];
+    }
 }
 
 void ofxLabelView::setAlignment(TextAlignment align) {

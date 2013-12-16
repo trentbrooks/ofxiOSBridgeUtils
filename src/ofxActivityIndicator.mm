@@ -31,5 +31,8 @@ void ofxActivityIndicator::add(bool useLargeIndicator, ofColor clr) {
 
 void ofxActivityIndicator::remove() {
 
-	if(isIndicatorAdded) [activityIndicatorView removeFromSuperview];
+	if(isIndicatorAdded) {
+        [activityIndicatorView removeFromSuperview];
+        isIndicatorAdded = false;
+    }
 }

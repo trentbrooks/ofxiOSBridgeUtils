@@ -27,7 +27,10 @@ public:
     
     void printSystemFonts();
     void setFont(string name, int size);
+    void setColor(ofColor clr);
     void setAlignment(TextAlignment align);
+    
+    bool isAdded() { return isLabelAdded; };
     
 protected:
     
@@ -35,5 +38,6 @@ protected:
     int fontSize;
     bool isLabelAdded;
     UILabel* label;
+    ofColor textClr;
     
 };

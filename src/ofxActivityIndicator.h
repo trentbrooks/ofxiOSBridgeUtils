@@ -22,6 +22,8 @@ public:
     // create activity window with options
     void add(bool useLargeIndicator, ofColor clr= ofColor(255));
     void remove();
+    
+    bool isAdded() { return isIndicatorAdded; };
 
 protected:
 
