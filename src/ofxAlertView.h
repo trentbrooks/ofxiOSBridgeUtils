@@ -52,6 +52,10 @@ public:
     
     ofEvent<ofAlertViewEventArgs> alertClosedEvent;
     void alertClosed(int buttonIndex, string text);
+    
+    // set alert view style- default=0, secure text=1, plain text=2, login/password=3
+    void setAlertViewStyle(int style);
+    UIAlertViewStyle alertViewStyle; //UIAlertViewStylePlainTextInput
 
 protected:
 

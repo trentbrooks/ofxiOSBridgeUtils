@@ -6,6 +6,7 @@ ofxAlertView::ofxAlertView(){
     
     // setup objc style delegate
     alertViewDelegate = [[AlertViewDelegate alloc] init:this ];
+    alertViewStyle = UIAlertViewStylePlainTextInput;
 }
 
 ofxAlertView::~ofxAlertView(){
@@ -22,6 +23,11 @@ void ofxAlertView::alertClosed(int buttonIndex, string text) {
     ofNotifyEvent(alertClosedEvent, event);
 }
 
+void ofxAlertView::setAlertViewStyle(int style) {
+    
+    alertViewStyle = (UIAlertViewStyle) style;
+}
+
 void ofxAlertView::add(string title, string message, string buttonLabel, bool hasTextInput, bool isTextNumeric) {
     
     
@@ -31,7 +37,7 @@ void ofxAlertView::add(string title, string message, string buttonLabel, bool ha
                                             cancelButtonTitle:[NSString stringWithUTF8String:buttonLabel.c_str()]
                                             otherButtonTitles:nil];
     if(hasTextInput) {
-        _alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        _alert.alertViewStyle = alertViewStyle;
         if(isTextNumeric) {
             UITextField * alertTextField = [_alert textFieldAtIndex:0];
             alertTextField.keyboardType = UIKeyboardTypeNumberPad;
@@ -49,7 +55,7 @@ void ofxAlertView::add(string title, string message, string buttonLabel, string 
                                             cancelButtonTitle:[NSString stringWithUTF8String:buttonLabel.c_str()]
                                             otherButtonTitles:[NSString stringWithUTF8String:otherButtonLabel.c_str()], nil];
     if(hasTextInput) {
-        _alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        _alert.alertViewStyle = alertViewStyle;
         if(isTextNumeric) {
             UITextField * alertTextField = [_alert textFieldAtIndex:0];
             alertTextField.keyboardType = UIKeyboardTypeNumberPad;
@@ -85,7 +91,7 @@ void ofxAlertView::remove() {
 
     //NSLog(@"something... %ld", (long)buttonIndex);
     string text = "";
-    if(alertView.alertViewStyle == UIAlertViewStylePlainTextInput) {
+    if(alertView.alertViewStyle != UIAlertViewStyleDefault) {
         UITextField * alertTextField = [alertView textFieldAtIndex:0];
         text = string([alertTextField.text UTF8String]);
     }
